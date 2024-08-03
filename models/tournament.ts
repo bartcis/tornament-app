@@ -14,7 +14,10 @@ export interface ITournament {
   roundTwo: Game[];
   roundThree: Game[];
   roundFour: Game[];
-final: string
+  winner: {
+    name: string
+    count: number
+  };
 }
 
 // Merging ITodo interface with mongoose's Document interface to create 
@@ -31,8 +34,16 @@ const playerDefinition = {
         type: String,
         required: false,
       },
+      playerOneCount: {
+        type: Number,
+        required: false,
+      },
     playerTwo: {
         type: String,
+        required: false,
+      },
+      playerTwoCount: {
+        type: Number,
         required: false,
       },
     gameId: {
@@ -50,7 +61,7 @@ const tournamentSchema = new mongoose.Schema<ITournamentDocument>(
     roundTwo: [playerDefinition],
     roundThree: [playerDefinition],
     roundFour: [playerDefinition],
-    final: {
+    winner: {
         type: String,
         required: false,
       },
