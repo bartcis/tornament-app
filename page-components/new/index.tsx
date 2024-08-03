@@ -9,7 +9,7 @@ import { clearStorageData, setStorageData, StorageDataDefinition } from "@/utils
 import { useRouter } from 'next/navigation'
 import { ROUTES } from "@/utils/route-definition";
 import { firstRoundGenerator } from "@/utils/round-generator";
-import { createTournamnet } from "@/lib/actions";
+import { createTournament } from "@/lib/actions";
 
 
 export const NewTournament = () => {
@@ -25,7 +25,6 @@ export const NewTournament = () => {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(true) // Set loading to true when the request starts
-    console.log(event.currentTarget)
 
     try {
       const formData = new FormData(event.currentTarget)
@@ -42,7 +41,7 @@ export const NewTournament = () => {
 
       setStorageData(data)
       const roundOne = firstRoundGenerator(data.players)
-      await createTournamnet({uuid, roundOne})
+      await createTournament({uuid, roundOne})
 
       push(ROUTES.ROOT)
     } catch (error) {
@@ -65,7 +64,7 @@ export const NewTournament = () => {
         <div className="grid grid-flow-col grid-cols-3 grid-rows-6 gap-4">
           {usersArray.map(user =>  <Input name={`player-${user}`} label={`Zawodnik ${user}`} key={`player-${user}`}/>)}
         </div>
-        <Button text="Stwórz nowy turniej" type="submit"/>
+        <Button text="Stwórz nowy turniej" type="submit" disabled={!isLoading}/>
         </form>
      </main>
     </>

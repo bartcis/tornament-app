@@ -8,8 +8,8 @@ export const setStorageData = (data: StorageDataDefinition) => localStorage.setI
 
 export const clearStorageData = () => localStorage.clear();
 
-export const getStorageData = () => {
-    if(!localStorage) return
+export const getStorageData = (): StorageDataDefinition | null => {
+    if(!localStorage) return null
     const data = localStorage.getItem(storageName)
     return data ? JSON.parse(data) : null
 };

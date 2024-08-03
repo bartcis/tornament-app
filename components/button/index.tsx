@@ -8,12 +8,13 @@ type Props = {
     variant?: 'primary' | 'secondary'
     href?: string
     type?: 'submit'
+    disabled?: boolean
 }
 
 export const Button = ({text,
     onClick,
     variant = 'primary',
-    href, type} : Props) => {
+    href, type, disabled} : Props) => {
         const classes = `m-auto max-w-[300px] border-solid border-2 border-purple-500 ${variant === 'primary' ? 'bg-purple-500' : ''} hover:bg-purple-300 hover:text-white ${variant === 'primary' ? ' text-white' : 'text-purple-500'} font-bold py-2 px-4 rounded`
         if (href) {
             return <Link
@@ -27,7 +28,7 @@ export const Button = ({text,
           </Link>
         }
     return (
-        <button type={type} onClick={onClick} className={classes}>
+        <button disabled={disabled} type={type} onClick={onClick} className={classes}>
   {text}
 </button>
     )
