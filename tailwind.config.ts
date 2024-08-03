@@ -4,12 +4,15 @@ const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./page-components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
-        'purple': '#471257',
+        'purple-300': '#7b1f96',
+        'purple-500': '#471257',
+        'purple-700': '#25092d',
       },
       fontFamily: {
         body: ['TenorSans', 'serif']
