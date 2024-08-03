@@ -16,7 +16,7 @@ export const App = () => {
           src="/logo.svg"
           width={300}
           height={300}
-          alt="Picture of the author"
+          alt="Efekt Perła Wschodu"
         />
         <h1>Wielki turniej gorących pytań</h1>
       </header>

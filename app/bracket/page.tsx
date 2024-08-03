@@ -1,9 +1,5 @@
-import Image from "next/image";
+import { Bracket } from "@/page-components/bracket";
 
-export default function Bracket() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <p>Bracket</p>
-    </main>
-  );
+export default function BracketPage () {
+  return <Bracket />;
 }

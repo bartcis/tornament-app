@@ -1,4 +1,4 @@
-import { App } from "@/page-components/app/app";
+import { App } from "@/page-components/app";
 
 export default function Home() {
   return <App />;
