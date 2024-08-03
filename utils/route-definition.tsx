@@ -1,5 +1,6 @@
 export enum ROUTES {
     ROOT = '/',
     TOURNAMENT = '/bracket',
-    NEW = '/new'
+    NEW = '/new',
+    ADMIN = '/admin'
 }

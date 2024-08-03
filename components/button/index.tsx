@@ -7,13 +7,14 @@ type Props = {
     onClick?: () => void
     variant?: 'primary' | 'secondary'
     href?: string
+    type?: 'submit'
 }
 
 export const Button = ({text,
     onClick,
     variant = 'primary',
-    href} : Props) => {
-        const classes = `border-solid border-2 border-purple-500 ${variant === 'primary' ? 'bg-purple-500' : ''} hover:bg-purple-300 hover:text-white ${variant === 'primary' ? ' text-white' : 'text-purple-500'} font-bold py-2 px-4 rounded`
+    href, type} : Props) => {
+        const classes = `m-auto max-w-[300px] border-solid border-2 border-purple-500 ${variant === 'primary' ? 'bg-purple-500' : ''} hover:bg-purple-300 hover:text-white ${variant === 'primary' ? ' text-white' : 'text-purple-500'} font-bold py-2 px-4 rounded`
         if (href) {
             return <Link
             href={{
@@ -26,7 +27,7 @@ export const Button = ({text,
           </Link>
         }
     return (
-        <button onClick={onClick} className={classes}>
+        <button type={type} onClick={onClick} className={classes}>
   {text}
 </button>
     )
