@@ -8,7 +8,7 @@ export const useCurrentTournament = ({ refetch }: { refetch?: boolean }) => {
   const tournamentId = currentTournament?.uuid;
 
   useEffect(() => {
-    if (tournamentId) {
+    if (tournamentId && refetch) {
       const getTournament = async () => {
         try {
           const request = await fetch(`/api/tournament?uuid=${tournamentId}`);

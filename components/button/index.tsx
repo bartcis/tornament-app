@@ -23,7 +23,7 @@ export const Button = ({
     variant === "primary" ? "bg-purple-500" : ""
   } hover:bg-purple-300 hover:text-white ${
     variant === "primary" ? " text-white" : "text-purple-500"
-  } font-bold py-2 px-4 rounded`;
+  } font-bold py-2 px-4 rounded disabled:text-grey disabled:border-grey hover:disabled:bg-white`;
   if (href) {
     return (
       <Link

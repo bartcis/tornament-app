@@ -1,10 +1,48 @@
+import { getVoting } from "@/lib/actions-voting";
 import { useCurrentGame } from "@/utils/context/current-game";
 import { useCounter } from "@/utils/hooks/useCounter";
+import { useEffect } from "react";
 
-export const CurrentVote = () => {
-  const { game } = useCurrentGame();
+export const CurrentVote = ({
+  currentRound,
+  tournamentId,
+  setRefetch,
+}: {
+  currentRound: number | null;
+  tournamentId?: string;
+  setRefetch: () => void;
+}) => {
+  const { game, setIsVotingActive, setContextGame } = useCurrentGame();
   const { seconds, formatTime } = useCounter();
-  console.log("seconds", seconds);
+
+  useEffect(() => {
+    const completeVoting = async () => {
+      try {
+        const votingRequest = await fetch(`/api/voting?shouldReset=true`);
+        const votingResponse = await votingRequest.json();
+        const gameId = votingResponse[0].currentGame.gameId;
+        const playerOneResult = votingResponse[0].playerOneVotes || 0;
+        const playerTwoResult = votingResponse[0].playerTwoVotes || 0;
+
+        await fetch(
+          `/api/tournament?uuid=${tournamentId}&round=${currentRound}&gameId=${gameId}&p1=${playerOneResult}&p2=${playerTwoResult}`,
+          {
+            method: "PUT",
+          }
+        );
+
+        setIsVotingActive(false);
+        setContextGame(null);
+        setRefetch();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (seconds === 0) {
+      completeVoting();
+    }
+  }, [seconds]);
 
   return (
     <>
@@ -14,6 +52,8 @@ export const CurrentVote = () => {
           <h2>
             {game?.playerOne} vs {game?.playerTwo}
           </h2>
+          <p>Runda: </p>
+          <h2>{currentRound}</h2>
           <p>Pozostało: </p>
           <h2>{formatTime(seconds)}</h2>
         </div>

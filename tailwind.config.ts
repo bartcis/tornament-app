@@ -10,12 +10,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'purple-300': '#7b1f96',
-        'purple-500': '#471257',
-        'purple-700': '#25092d',
+        "purple-300": "#7b1f96",
+        "purple-500": "#471257",
+        "purple-700": "#25092d",
+        grey: "#a6a6a6",
       },
       fontFamily: {
-        body: ['TenorSans', 'serif']
+        body: ["TenorSans", "serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

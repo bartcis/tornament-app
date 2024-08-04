@@ -7,7 +7,7 @@ export interface Game {
   playerTwo: string;
   playerOneCount: number;
   playerTwoCount: number;
-  gameId: number;
+  gameId: string;
   isFinished: boolean;
 }
 
@@ -32,7 +32,7 @@ export interface ITournamentDocument extends ITournament, Document {
 
 // Defining a mongoose schema for the Tournament document, specifying the types
 // and constraints
-const playerDefinition = {
+export const gameDefinition = {
   playerOne: {
     type: String,
     required: false,
@@ -50,7 +50,7 @@ const playerDefinition = {
     required: false,
   },
   gameId: {
-    type: Number,
+    type: String,
     required: true,
   },
   isFinished: {
@@ -64,10 +64,10 @@ const tournamentSchema = new mongoose.Schema<ITournamentDocument>(
       type: String,
       required: true,
     },
-    roundOne: [playerDefinition],
-    roundTwo: [playerDefinition],
-    roundThree: [playerDefinition],
-    roundFour: [playerDefinition],
+    roundOne: [gameDefinition],
+    roundTwo: [gameDefinition],
+    roundThree: [gameDefinition],
+    roundFour: [gameDefinition],
     winner: {
       type: String,
       required: false,

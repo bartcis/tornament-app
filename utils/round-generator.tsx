@@ -1,5 +1,6 @@
 import { Game } from "@/models/tournament";
 import { FormPlayer } from "./storage";
+import { generateString } from "./generateString";
 
 export const firstRoundGenerator = (players: FormPlayer[]): Game[] => {
   const shuffledArray = players.sort(() => 0.5 - Math.random());
@@ -10,12 +11,12 @@ export const firstRoundGenerator = (players: FormPlayer[]): Game[] => {
     chunks.push(shuffledArray.slice(i, i + chunkSize));
   }
 
-  return chunks.map((item, index) => ({
+  return chunks.map((item) => ({
     playerOne: item[0].value,
     playerTwo: item[1].value,
     playerOneCount: 0,
     playerTwoCount: 0,
-    gameId: index,
+    gameId: generateString(8),
     isFinished: false,
   }));
 };

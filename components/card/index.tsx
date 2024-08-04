@@ -1,10 +1,11 @@
 import { Game } from "@/models/tournament";
 import { Button } from "../button";
 import { useCallback } from "react";
+import { useCurrentGame } from "@/utils/context/current-game";
 
 type Props = Game & {
-  onCountClick: (game: Game) => void;
-  onFinishClick?: () => void;
+  onCountClick: (game: Game, round: number) => void;
+  round: number;
 };
 
 export const Card = ({
@@ -15,19 +16,24 @@ export const Card = ({
   gameId,
   isFinished,
   onCountClick,
-  onFinishClick,
+  round,
 }: Props) => {
+  const { isVotingActive } = useCurrentGame();
+
   const handleConfirm = useCallback(
     () =>
-      onCountClick({
-        playerOne,
-        playerTwo,
-        playerOneCount,
-        playerTwoCount,
-        gameId,
-        isFinished,
-      }),
-    []
+      onCountClick(
+        {
+          playerOne,
+          playerTwo,
+          playerOneCount,
+          playerTwoCount,
+          gameId,
+          isFinished,
+        },
+        round
+      ),
+    [round]
   );
 
   return (
@@ -42,18 +48,12 @@ export const Card = ({
           <p>{playerTwoCount}</p>
         </div>
       </div>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col ">
         <Button
           text="Nowe Głosowanie"
           variant="secondary"
-          disabled={isFinished}
+          disabled={isFinished || isVotingActive}
           onClick={handleConfirm}
-        />
-        <Button
-          text="Zakończ pojedynek"
-          variant="secondary"
-          disabled={isFinished}
-          onClick={onFinishClick}
         />
       </div>
     </div>

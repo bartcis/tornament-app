@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useCurrentGame } from "../context/current-game";
 
+const baseCount = 10;
 export const useCounter = () => {
   const { game } = useCurrentGame();
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(baseCount);
 
   useEffect(() => {
     // Exit early if countdown is finished
@@ -19,6 +20,12 @@ export const useCounter = () => {
     // Clean up the timer
     return () => clearInterval(timer);
   }, [seconds, game]);
+
+  useEffect(() => {
+    if (game) {
+      setSeconds(baseCount);
+    }
+  }, [game]);
 
   // Format the remaining time (e.g., “00:05:10” for 5 minutes and 10 seconds)
   const formatTime = (timeInSeconds: number) => {
