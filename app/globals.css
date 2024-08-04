@@ -45,7 +45,7 @@ h2 {
 }
 
 @layer components {
-  main{
+  section{
     display:flex;
     flex-direction:row;
   }

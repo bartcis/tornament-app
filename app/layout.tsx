@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { connectToMongoDB } from "@/lib/db";
+import { GameContextProvider } from "@/utils/context/current-game";
 
 export const metadata: Metadata = {
   title: "Perła Wschodu - Turniej gorących pytań",
@@ -12,12 +13,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  connectToMongoDB()
-  
+  connectToMongoDB();
+
   return (
     <html lang="en">
       <body className="min-h-screen">
-        {children}</body>
+        <GameContextProvider>{children}</GameContextProvider>
+      </body>
     </html>
   );
 }
