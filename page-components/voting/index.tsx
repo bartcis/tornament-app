@@ -4,7 +4,7 @@ import { Button } from "@/components/button";
 import { Loader } from "@/components/loader";
 import { Game } from "@/models/tournament";
 import Image from "next/image";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
 const votingGuard = "voting";
 export const VotingComponent = () => {
@@ -65,6 +65,12 @@ export const VotingComponent = () => {
     }
   };
 
+  const refreshPage = useCallback(() => {
+    if (typeof window !== "undefined") {
+      window.location.reload();
+    }
+  }, []);
+
   return (
     <>
       <header className="flex flex-col items-center justify-between gap-8 p-6">
@@ -77,7 +83,12 @@ export const VotingComponent = () => {
       </header>
       <main className="p-4	m-auto text-center">
         {isLoading && <Loader />}
-        {!game && !isLoading && <h2>Brak aktywnego głosowania</h2>}
+        {!game && !isLoading && (
+          <>
+            <h2 className="py-8">Brak aktywnego głosowania</h2>
+            <Button text="Odśwież" onClick={refreshPage} />
+          </>
+        )}
         {game && !isLoading && (
           <form onSubmit={onSubmit}>
             <h2 className="p-4">Kto wypadł lepiej?</h2>
