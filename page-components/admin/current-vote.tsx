@@ -1,4 +1,3 @@
-import { getVoting } from "@/lib/actions-voting";
 import { useCurrentGame } from "@/utils/context/current-game";
 import { useCounter } from "@/utils/hooks/useCounter";
 import { useEffect } from "react";
@@ -21,8 +20,10 @@ export const CurrentVote = ({
         const votingRequest = await fetch(`/api/voting?shouldReset=true`);
         const votingResponse = await votingRequest.json();
         const gameId = votingResponse[0].currentGame.gameId;
-        const playerOneResult = votingResponse[0].playerOneVotes || 0;
-        const playerTwoResult = votingResponse[0].playerTwoVotes || 0;
+        const playerOneResult =
+          votingResponse[0].currentGame.playerOneCount || 0;
+        const playerTwoResult =
+          votingResponse[0].currentGame.playerTwoCount || 0;
 
         await fetch(
           `/api/tournament?uuid=${tournamentId}&round=${currentRound}&gameId=${gameId}&p1=${playerOneResult}&p2=${playerTwoResult}`,

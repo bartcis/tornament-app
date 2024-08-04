@@ -18,16 +18,16 @@
 
 @layer base {
   @font-face {
-    font-family: 'TenorSans';
+    font-family: "TenorSans";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/TenorSans-Regular.woff2) format('woff2');
+    src: url(/fonts/TenorSans-Regular.woff2) format("woff2");
   }
 }
 
 body {
-  font-family: 'TenorSans';
+  font-family: "TenorSans";
 }
 
 h1 {
@@ -45,55 +45,61 @@ h2 {
 }
 
 @layer components {
-  section{
-    display:flex;
-    flex-direction:row;
+  section {
+    display: flex;
+    flex-direction: row;
   }
 
-  .round{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    width:400px;
-    list-style:none;
-    padding:0;
+  .round {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 400px;
+    list-style: none;
+    padding: 0;
   }
-    .round .spacer{ flex-grow:1; }
-    .round .spacer:first-child,
-    .round .spacer:last-child{ flex-grow:.5; }
-  
-    .round .game-spacer{
-      flex-grow:1;
-    }
-  
+  .round .spacer {
+    flex-grow: 1;
+  }
+  .round .spacer:first-child,
+  .round .spacer:last-child {
+    flex-grow: 0.5;
+  }
+
+  .round .game-spacer {
+    flex-grow: 1;
+  }
+
   /*
    *  General Styles
   */
-  
-  li.game{
+
+  li.game {
     padding-left: 20px;
   }
-  
-    li.game.winner{
-      font-weight:bold;
-    }
-    li.game span{
-      float:right;
-      margin-right:5px;
-    }
-  
-    li.game-top{ border-bottom:3px solid #7b1f96; }
-  
-    li.game-spacer{ 
-      border-right:3px solid #7b1f96;
-      min-height:40px;
-    }
 
-    li.game-spacer-final{ 
-      min-height:40px;
-    }
-  
-    li.game-bottom{ 
-      border-top:3px solid #7b1f96;
-    }
+  li.game.winner {
+    font-weight: bold;
+  }
+  li.game span {
+    float: right;
+    margin-right: 5px;
+  }
+
+  li.game-top {
+    border-bottom: 3px solid #7b1f96;
+  }
+
+  li.game-spacer {
+    border-right: 3px solid #7b1f96;
+    min-height: 20px;
+  }
+
+  li.game-spacer-final {
+    min-height: 20px;
+  }
+
+  li.game-bottom {
+    border-top: 3px solid #7b1f96;
+  }
 }

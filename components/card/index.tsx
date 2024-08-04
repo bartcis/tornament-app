@@ -50,7 +50,7 @@ export const Card = ({
       </div>
       <div className="flex flex-col ">
         <Button
-          text="Nowe Głosowanie"
+          text="Głosowanie"
           variant="secondary"
           disabled={isFinished || isVotingActive}
           onClick={handleConfirm}

@@ -57,6 +57,9 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
 
     const tournament = await Tournament.findOne({ uuid }).exec();
 
+    console.log("playerOneVotes", playerOneVotes);
+    console.log("playerTwoVotes", playerTwoVotes);
+
     const getRoundParam = () => {
       if (round === "1") {
         return "roundOne";

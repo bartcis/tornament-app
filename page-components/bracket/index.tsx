@@ -7,16 +7,16 @@ import { getStorageData } from "@/utils/storage";
 export const Bracket = () => {
   const currentTournament = getStorageData();
 
-  const bracket = useCurrentTournament({});
+  const bracket = useCurrentTournament({ refetch: true });
 
   return (
     <>
       <Header title="Drabinka turniejowa" />
-      <h1 className="flex flex-col items-center justify-between gap-8 p-8">
+      <h2 className="flex flex-col items-center justify-between gap-8 p-2">
         {currentTournament?.name}
-      </h1>
+      </h2>
 
-      <section className="p-8">
+      <section className="p-2">
         <ul className="round round-1">
           <li className="spacer">&nbsp;</li>
 
