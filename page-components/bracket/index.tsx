@@ -4,6 +4,7 @@ import { Header } from "@/components/header";
 import { Loader } from "@/components/loader";
 import { useCurrentTournament } from "@/utils/hooks/useCurrentTournament";
 import { getStorageData } from "@/utils/storage";
+import { VotingQRCode } from "./voting-qr-code";
 
 export const Bracket = () => {
   const currentTournament = getStorageData();
@@ -19,7 +20,8 @@ export const Bracket = () => {
 
       {isLoading && <Loader />}
       {!isLoading && (
-        <section className="p-2">
+        <section className="p-2 relative">
+          <VotingQRCode />
           <ul className="round round-1">
             <li className="spacer">&nbsp;</li>
 
