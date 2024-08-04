@@ -15,7 +15,10 @@ export const VotingComponent = () => {
     const getVoting = async () => {
       try {
         setIsLoading(true);
-        const currentStorage = localStorage.getItem(votingGuard);
+        const currentStorage =
+          typeof window !== "undefined"
+            ? window.localStorage.getItem(votingGuard)
+            : undefined;
         const votingRequest = await fetch(`/api/voting`);
         const votingResponse = await votingRequest.json();
         const game = votingResponse[0].currentGame;
@@ -49,7 +52,9 @@ export const VotingComponent = () => {
         await fetch(`/api/voting?gameId=${game.gameId}&result=${vote}`, {
           method: "PUT",
         });
-        localStorage.setItem(votingGuard, JSON.stringify(game.gameId));
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(votingGuard, JSON.stringify(game.gameId));
+        }
       }
       setIsLoading(false);
       setGame(null);

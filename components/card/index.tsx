@@ -33,7 +33,16 @@ export const Card = ({
         },
         round
       ),
-    [round]
+    [
+      round,
+      gameId,
+      isFinished,
+      onCountClick,
+      playerOne,
+      playerOneCount,
+      playerTwo,
+      playerTwoCount,
+    ]
   );
 
   return (

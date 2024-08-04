@@ -11,14 +11,24 @@ const storageName = "tournament";
 export const setStorageData = (
   data: StorageDataDefinition,
   name = storageName
-) => localStorage.setItem(name, JSON.stringify(data));
+) => {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(name, JSON.stringify(data));
+  }
+};
 
-export const clearStorageData = () => localStorage.clear();
+export const clearStorageData = () => {
+  if (typeof window !== "undefined") {
+    window.localStorage.clear();
+  }
+};
 
 export const getStorageData = (
   name = storageName
 ): StorageDataDefinition | null => {
-  if (!localStorage) return null;
-  const data = localStorage.getItem(name);
-  return data ? JSON.parse(data) : null;
+  if (typeof window !== "undefined") {
+    const data = window.localStorage.getItem(name);
+    return data ? JSON.parse(data) : null;
+  }
+  return null;
 };

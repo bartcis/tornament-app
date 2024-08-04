@@ -1,5 +1,7 @@
+"use client";
+
 import { Bracket } from "@/page-components/bracket";
 
-export default function BracketPage () {
+export default function BracketPage() {
   return <Bracket />;
 }
