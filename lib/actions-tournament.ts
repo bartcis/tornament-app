@@ -6,9 +6,15 @@ import { NextRequest, NextResponse } from "next/server";
 export const createTournament = async ({
   uuid,
   roundOne,
+  roundTwo,
+  roundThree,
+  roundFour,
 }: {
   uuid: string;
   roundOne: Game[];
+  roundTwo: Game[];
+  roundThree: Game[];
+  roundFour: Game[];
 }) => {
   await connectToMongoDB();
 
@@ -17,6 +23,9 @@ export const createTournament = async ({
     const newTournament = await Tournament.create({
       uuid,
       roundOne,
+      roundTwo,
+      roundThree,
+      roundFour,
     });
 
     // Saving the new Tournament

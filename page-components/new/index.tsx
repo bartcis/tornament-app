@@ -12,8 +12,12 @@ import {
 } from "@/utils/storage";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/route-definition";
-import { firstRoundGenerator } from "@/utils/round-generator";
+import {
+  firstRoundGenerator,
+  nextRoundGenerator,
+} from "@/utils/round-generators";
 import { createTournament } from "@/lib/actions-tournament";
+import { Loader } from "@/components/loader";
 
 export const NewTournament = () => {
   const usersArray = Array.from({ length: 16 }, (_, i) => i + 1);
@@ -44,7 +48,17 @@ export const NewTournament = () => {
 
       setStorageData(data);
       const roundOne = firstRoundGenerator(data.players);
-      await createTournament({ uuid, roundOne });
+      const roundTwo = nextRoundGenerator(4);
+      const roundThree = nextRoundGenerator(2);
+      const roundFour = nextRoundGenerator(1);
+
+      await createTournament({
+        uuid,
+        roundOne,
+        roundTwo,
+        roundThree,
+        roundFour,
+      });
 
       push(ROUTES.ROOT);
     } catch (error) {
@@ -59,28 +73,27 @@ export const NewTournament = () => {
     <>
       <Header title="Nowy turniej" />
       <main>
-        <form
-          onSubmit={onSubmit}
-          className="flex flex-col justify-between gap-8 p-6"
-        >
-          <h2>Wpisz nazwę turnieju i nazwiska zawodników</h2>
-          <Input label="Nazwa turnieju" name="tournament" />
-          <h3>Zawodnicy</h3>
-          <div className="grid grid-flow-col grid-cols-3 grid-rows-6 gap-4">
-            {usersArray.map((user) => (
-              <Input
-                name={`player-${user}`}
-                label={`Zawodnik ${user}`}
-                key={`player-${user}`}
-              />
-            ))}
-          </div>
-          <Button
-            text="Stwórz nowy turniej"
-            type="submit"
-            disabled={isLoading}
-          />
-        </form>
+        {isLoading && <Loader />}
+        {!isLoading && (
+          <form
+            onSubmit={onSubmit}
+            className="flex flex-col justify-between gap-8 p-6"
+          >
+            <h2>Wpisz nazwę turnieju i nazwiska zawodników</h2>
+            <Input label="Nazwa turnieju" name="tournament" />
+            <h3>Zawodnicy</h3>
+            <div className="grid grid-flow-col grid-cols-3 grid-rows-6 gap-4">
+              {usersArray.map((user) => (
+                <Input
+                  name={`player-${user}`}
+                  label={`Zawodnik ${user}`}
+                  key={`player-${user}`}
+                />
+              ))}
+            </div>
+            <Button text="Stwórz nowy turniej" type="submit" />
+          </form>
+        )}
       </main>
     </>
   );

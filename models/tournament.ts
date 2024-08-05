@@ -3,8 +3,8 @@ import mongoose, { Document, Model } from "mongoose";
 
 // Defining the structure of a todo item using TypeScript interfaces
 export interface Game {
-  playerOne: string;
-  playerTwo: string;
+  playerOne?: string;
+  playerTwo?: string;
   playerOneCount: number;
   playerTwoCount: number;
   gameId: string;

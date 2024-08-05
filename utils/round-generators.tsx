@@ -20,3 +20,20 @@ export const firstRoundGenerator = (players: FormPlayer[]): Game[] => {
     isFinished: false,
   }));
 };
+
+export const nextRoundGenerator = (gamesCount: number): Game[] => {
+  const gamesArray = [];
+
+  for (let i = 0; i < gamesCount; i++) {
+    gamesArray.push({
+      playerOne: undefined,
+      playerTwo: undefined,
+      playerOneCount: 0,
+      playerTwoCount: 0,
+      gameId: generateString(8),
+      isFinished: false,
+    });
+  }
+
+  return gamesArray;
+};
