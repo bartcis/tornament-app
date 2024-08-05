@@ -61,7 +61,7 @@ export const Card = ({
         <Button
           text="Głosowanie"
           variant="secondary"
-          disabled={isFinished || isVotingActive}
+          disabled={isFinished || isVotingActive || !(playerTwo && playerOne)}
           onClick={handleConfirm}
         />
       </div>
