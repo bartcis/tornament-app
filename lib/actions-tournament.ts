@@ -1,6 +1,12 @@
 "use server";
 import { connectToMongoDB } from "./db";
 import Tournament, { Game } from "@/models/tournament";
+import {
+  advanceWiningPlayer,
+  getChampion,
+  getNextRoundParam,
+  getRoundParam,
+} from "@/utils/tournament";
 import { NextRequest, NextResponse } from "next/server";
 
 export const createTournament = async ({
@@ -65,24 +71,10 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
     const playerTwoVotes = params.get("p2");
 
     const tournament = await Tournament.findOne({ uuid }).exec();
+    const currentRoundParam = getRoundParam(round);
+    const nextRoundParam = getNextRoundParam(currentRoundParam);
+    const currentRound = tournament ? tournament[currentRoundParam] : [];
 
-    console.log("playerOneVotes", playerOneVotes);
-    console.log("playerTwoVotes", playerTwoVotes);
-
-    const getRoundParam = () => {
-      if (round === "1") {
-        return "roundOne";
-      }
-      if (round === "2") {
-        return "roundTwo";
-      }
-      if (round === "3") {
-        return "roundThree";
-      }
-      return "roundFour";
-    };
-
-    const currentRound = tournament ? tournament[getRoundParam()] : [];
     const modifiedRound = currentRound.map((game) => {
       if (game.gameId === gameId) {
         return {
@@ -98,9 +90,35 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
       return game;
     });
 
+    const modifiedTournament = {
+      [currentRoundParam]: modifiedRound,
+      winner: {
+        name: "",
+        count: 0,
+      },
+    };
+
+    if (nextRoundParam && nextRoundParam !== "winner") {
+      const newRound = advanceWiningPlayer({
+        tournament,
+        modifiedRound,
+        nextRoundParam,
+        gameId,
+      });
+
+      if (newRound) {
+        modifiedTournament[nextRoundParam] = newRound;
+      }
+    }
+
+    if (nextRoundParam && nextRoundParam === "winner") {
+      const winner = getChampion({ final: modifiedRound[0] });
+      modifiedTournament.winner = winner;
+    }
+
     await Tournament.findOneAndUpdate(
       { uuid },
-      { [getRoundParam()]: modifiedRound }
+      { ...modifiedTournament }
     ).exec();
     return NextResponse.json({ status: 200 });
   } catch (error) {

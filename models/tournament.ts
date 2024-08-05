@@ -69,8 +69,14 @@ const tournamentSchema = new mongoose.Schema<ITournamentDocument>(
     roundThree: [gameDefinition],
     roundFour: [gameDefinition],
     winner: {
-      type: String,
-      required: false,
+      name: {
+        type: String,
+        required: false,
+      },
+      count: {
+        type: Number,
+        required: false,
+      },
     },
   },
   {
