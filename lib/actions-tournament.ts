@@ -1,6 +1,7 @@
 "use server";
 import { connectToMongoDB } from "./db";
 import Tournament, { Game } from "@/models/tournament";
+import { getPusherInstance } from "@/utils/pusher";
 import {
   advanceWiningPlayer,
   getChampion,
@@ -8,6 +9,8 @@ import {
   getRoundParam,
 } from "@/utils/tournament";
 import { NextRequest, NextResponse } from "next/server";
+
+const pusherServer = getPusherInstance();
 
 export const createTournament = async ({
   uuid,
@@ -46,8 +49,7 @@ export const getTournamentByUuid = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const urlObj = new URL(request.url);
-    const params = new URLSearchParams(urlObj.search);
+    const params = request.nextUrl.searchParams;
     const uuid = params.get("uuid");
     const tournament = await Tournament.findOne({ uuid }).exec();
 
@@ -62,8 +64,7 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const urlObj = new URL(request.url);
-    const params = new URLSearchParams(urlObj.search);
+    const params = request.nextUrl.searchParams;
     const uuid = params.get("uuid");
     const gameId = params.get("gameId");
     const round = params.get("round");
@@ -120,6 +121,11 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
       { uuid },
       { ...modifiedTournament }
     ).exec();
+    await pusherServer.trigger("tournament-updated", "evt::test", {
+      message: "Reload the bracket",
+      user: "Admin",
+      date: new Date(),
+    });
     return NextResponse.json({ status: 200 });
   } catch (error) {
     console.log(error);

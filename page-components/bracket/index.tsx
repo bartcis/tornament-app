@@ -5,11 +5,34 @@ import { Loader } from "@/components/loader";
 import { useCurrentTournament } from "@/utils/hooks/useCurrentTournament";
 import { getStorageData } from "@/utils/storage";
 import { VotingQRCode } from "./voting-qr-code";
+import { useEffect, useState } from "react";
+import { pusherClient } from "@/utils/pusher";
 
 export const Bracket = () => {
   const currentTournament = getStorageData();
+  const [refetch, setRefetch] = useState(true);
 
-  const { tournament, isLoading } = useCurrentTournament({ refetch: true });
+  const { tournament, isLoading } = useCurrentTournament({ refetch });
+
+  useEffect(() => {
+    if (refetch) {
+      setRefetch(false);
+    }
+  }, [refetch]);
+
+  useEffect(() => {
+    const channel = pusherClient
+      .subscribe("tournament-updated")
+      .bind("evt::test", (data: any) => {
+        if (data.message === "Reload the bracket") {
+          setRefetch(true);
+        }
+      });
+
+    return () => {
+      channel.unbind();
+    };
+  }, []);
 
   return (
     <>

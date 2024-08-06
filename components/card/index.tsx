@@ -46,7 +46,7 @@ export const Card = ({
   );
 
   return (
-    <div className="flex p-2 content-center flex-nowrap gap-2 border border-purple-600 rounded-lg">
+    <div className="flex p-2 content-center flex-wrap min-[1400px]:flex-nowrap gap-2 border border-purple-600 rounded-lg">
       <div className="flex w-80 flex-col content-center justify-center divide-y divide-purple-600">
         <div className="flex w-40 gap-8 p-2 justify-between">
           <p>{playerOne}</p>

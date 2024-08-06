@@ -23,8 +23,7 @@ export const getVoting = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const urlObj = new URL(request.url);
-    const params = new URLSearchParams(urlObj.search);
+    const params = request.nextUrl.searchParams;
     const resetFlag = params.get("shouldReset");
     const voting = await Voting.find().exec();
 
@@ -43,8 +42,7 @@ export const updateVoting = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const urlObj = new URL(request.url);
-    const params = new URLSearchParams(urlObj.search);
+    const params = request.nextUrl.searchParams;
     const result = params.get("result");
     const gameId = params.get("gameId");
 
@@ -59,8 +57,6 @@ export const updateVoting = async (request: NextRequest) => {
       playerOneCount: result === "p1" ? p1Count + 1 : p1Count,
       playerTwoCount: result === "p2" ? p2Count + 1 : p2Count,
     };
-
-    console.log("modifiedGame", modifiedGame);
 
     await Voting.findOneAndUpdate(
       { "currentGame.gameId": gameId },
