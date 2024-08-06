@@ -38,6 +38,11 @@ h2 {
   font-size: 1.5rem;
 }
 
+h3 {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -48,6 +53,7 @@ h2 {
   section {
     display: flex;
     flex-direction: row;
+    line-height: 1.4;
   }
 
   .round {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCurrentGame } from "../context/current-game";
 
-const baseCount = 15;
+const baseCount = 3;
 export const useCounter = () => {
   const { game } = useCurrentGame();
   const [seconds, setSeconds] = useState(baseCount);

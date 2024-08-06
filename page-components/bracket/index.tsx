@@ -144,49 +144,65 @@ export const Bracket = () => {
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top winner">
-              {tournament?.roundTwo[0]?.playerOne}{" "}
-              <span>{tournament?.roundTwo[0]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundTwo[0]?.playerOne}{" "}
+                <span>{tournament?.roundTwo[0]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom ">
-              {tournament?.roundTwo[0]?.playerTwo}{" "}
-              <span>{tournament?.roundTwo[0]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundTwo[0]?.playerTwo}{" "}
+                <span>{tournament?.roundTwo[0]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top winner">
-              {tournament?.roundTwo[1]?.playerOne}{" "}
-              <span>{tournament?.roundTwo[1]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundTwo[1]?.playerOne}{" "}
+                <span>{tournament?.roundTwo[1]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom ">
-              {tournament?.roundTwo[1]?.playerTwo}{" "}
-              <span>{tournament?.roundTwo[1]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundTwo[1]?.playerTwo}{" "}
+                <span>{tournament?.roundTwo[1]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top ">
-              {tournament?.roundTwo[2]?.playerOne}{" "}
-              <span>{tournament?.roundTwo[2]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundTwo[2]?.playerOne}{" "}
+                <span>{tournament?.roundTwo[2]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom winner">
-              {tournament?.roundTwo[2]?.playerTwo}{" "}
-              <span>{tournament?.roundTwo[2]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundTwo[2]?.playerTwo}{" "}
+                <span>{tournament?.roundTwo[2]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top ">
-              {tournament?.roundTwo[3]?.playerOne}{" "}
-              <span>{tournament?.roundTwo[3]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundTwo[3]?.playerOne}{" "}
+                <span>{tournament?.roundTwo[3]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom winner">
-              {tournament?.roundTwo[3]?.playerTwo}{" "}
-              <span>{tournament?.roundTwo[3]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundTwo[3]?.playerTwo}{" "}
+                <span>{tournament?.roundTwo[3]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
@@ -195,25 +211,33 @@ export const Bracket = () => {
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top winner">
-              {tournament?.roundThree[0]?.playerOne}{" "}
-              <span>{tournament?.roundThree[0]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundThree[0]?.playerOne}{" "}
+                <span>{tournament?.roundThree[0]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom ">
-              {tournament?.roundThree[0]?.playerTwo}{" "}
-              <span>{tournament?.roundThree[0]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundThree[0]?.playerTwo}{" "}
+                <span>{tournament?.roundThree[0]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top ">
-              {tournament?.roundThree[1]?.playerOne}{" "}
-              <span>{tournament?.roundThree[1]?.playerOneCount}</span>
+              <h3>
+                {tournament?.roundThree[1]?.playerOne}{" "}
+                <span>{tournament?.roundThree[1]?.playerOneCount}</span>
+              </h3>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom winner">
-              {tournament?.roundThree[1]?.playerTwo}{" "}
-              <span>{tournament?.roundThree[1]?.playerTwoCount}</span>
+              <h3>
+                {tournament?.roundThree[1]?.playerTwo}{" "}
+                <span>{tournament?.roundThree[1]?.playerTwoCount}</span>
+              </h3>
             </li>
 
             <li className="spacer">&nbsp;</li>
@@ -222,13 +246,17 @@ export const Bracket = () => {
             <li className="spacer">&nbsp;</li>
 
             <li className="game game-top winner">
-              {tournament?.roundFour[0]?.playerOne}{" "}
-              <span>{tournament?.roundFour[0]?.playerOneCount}</span>
+              <h2>
+                {tournament?.roundFour[0]?.playerOne}{" "}
+                <span>{tournament?.roundFour[0]?.playerOneCount}</span>
+              </h2>
             </li>
             <li className="game game-spacer">&nbsp;</li>
             <li className="game game-bottom ">
-              {tournament?.roundFour[0]?.playerTwo}{" "}
-              <span>{tournament?.roundFour[0]?.playerTwoCount}</span>
+              <h2>
+                {tournament?.roundFour[0]?.playerTwo}{" "}
+                <span>{tournament?.roundFour[0]?.playerTwoCount}</span>
+              </h2>
             </li>
 
             <li className="spacer">&nbsp;</li>
@@ -238,8 +266,11 @@ export const Bracket = () => {
             <li className="game game-spacer-final">&nbsp;</li>
 
             <li className="game game-top winner">
-              {tournament?.winner?.name}{" "}
-              <span>{tournament?.winner?.count}</span>
+              <h1>
+                {" "}
+                {tournament?.winner?.name}{" "}
+                <span>{tournament?.winner?.count}</span>
+              </h1>
             </li>
             <li className="game game-space-final">&nbsp;</li>
 

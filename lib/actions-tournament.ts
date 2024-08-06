@@ -80,9 +80,16 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
 
     const modifiedRound = currentRound.map((game) => {
       if (game.gameId === gameId) {
+        const playerOneCount = Number(playerOneVotes);
+        let playerTwoCount = Number(playerTwoVotes);
+
+        if (playerOneCount === playerTwoCount) {
+          playerTwoCount++;
+        }
+
         return {
-          playerOneCount: Number(playerOneVotes),
-          playerTwoCount: Number(playerTwoVotes),
+          playerOneCount: playerOneCount,
+          playerTwoCount: playerTwoCount,
           isFinished: true,
           playerOne: game.playerOne,
           playerTwo: game.playerTwo,

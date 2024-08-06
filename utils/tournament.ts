@@ -169,6 +169,8 @@ export const getChampion = ({ final }: { final: Game }) => {
   const count =
     final.playerOneCount > final.playerTwoCount
       ? final.playerOneCount
+      : final.playerOneCount === final.playerTwoCount
+      ? final.playerTwoCount + 1
       : final.playerTwoCount;
 
   return { name, count };
