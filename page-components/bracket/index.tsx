@@ -36,11 +36,7 @@ export const Bracket = () => {
 
   return (
     <>
-      <Header title="Drabinka turniejowa" />
-      <h2 className="flex flex-col items-center justify-between gap-8 p-2">
-        {currentTournament?.name}
-      </h2>
-
+      <Header title={currentTournament?.name} />
       {isLoading && <Loader />}
       {!isLoading && (
         <section className="p-2 relative">
