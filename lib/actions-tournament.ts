@@ -49,7 +49,8 @@ export const getTournamentByUuid = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const params = request.nextUrl.searchParams;
+    const urlObj = new URL(request.url);
+    const params = new URLSearchParams(urlObj.search);
     const uuid = params.get("uuid");
     const tournament = await Tournament.findOne({ uuid }).exec();
 
@@ -64,7 +65,8 @@ export const updateTournamentWithGameResult = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const params = request.nextUrl.searchParams;
+    const urlObj = new URL(request.url);
+    const params = new URLSearchParams(urlObj.search);
     const uuid = params.get("uuid");
     const gameId = params.get("gameId");
     const round = params.get("round");

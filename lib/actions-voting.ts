@@ -23,7 +23,8 @@ export const getVoting = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const params = request.nextUrl.searchParams;
+    const urlObj = new URL(request.url);
+    const params = new URLSearchParams(urlObj.search);
     const resetFlag = params.get("shouldReset");
     const voting = await Voting.find().exec();
 
@@ -42,7 +43,8 @@ export const updateVoting = async (request: NextRequest) => {
   await connectToMongoDB();
 
   try {
-    const params = request.nextUrl.searchParams;
+    const urlObj = new URL(request.url);
+    const params = new URLSearchParams(urlObj.search);
     const result = params.get("result");
     const gameId = params.get("gameId");
 
